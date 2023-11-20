@@ -190,6 +190,7 @@ public class Entrada extends Exception{
             System.out.println(missatge);
             try{
                 mstg =  sca.next();
+                sca.nextLine();
             }catch(Exception e){
                 throw new Entrada(e.getMessage());
             }
