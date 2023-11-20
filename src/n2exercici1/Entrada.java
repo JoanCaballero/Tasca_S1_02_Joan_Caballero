@@ -71,7 +71,6 @@ public class Entrada extends Exception{
         }while(!correcte);
         correcte = false;
         do {
-
             try{
                 char inicial = llegirChar("Introdueix la teva inicial:");
                 System.out.println("La teva inicial és: " + inicial + ". Aquesta variable és del tipus char.");
@@ -80,24 +79,30 @@ public class Entrada extends Exception{
                 System.out.println(e.getMessage());
             }
         }while(!correcte);
-        /*correcte = false;
-        do {
-
+        correcte = false;
+        do{
             try{
-                char inicial = llegirChar("Introdueix la teva inicial:");
-                System.out.println("La teva inicial és: " + inicial + ". Aquesta variable és del tipus char.");
+                String cadena = llegirString("Introdueix una cadena de text:");
+                System.out.println("La cadena que has escrit és: " + cadena + ". Aquesta variable és del tipus String.");
                 correcte = true;
-            }catch (Entrada e){
+            }catch(Entrada e){
                 System.out.println(e.getMessage());
             }
-        }while(!correcte);*/
-        //System.out.println("La teva edat és: " + llegirInt("Introdueix la teva edat:" + ". Aquesta variable és del tipus int"));
-        //System.out.println("La teva edat és: " + llegirInt("Introdueix la teva edat:" + ". Aquesta variable és del tipus int"));
-        //System.out.println("La teva edat és: " + llegirInt("Introdueix la teva edat:" + ". Aquesta variable és del tipus int"));
+        }while(!correcte);
+        correcte = false;
+        do{
+            try{
+                boolean siNo = llegirSiNo("Escriu 's' o 'n':");
+                System.out.println("La teva resposta és: " + siNo + ". Aquesta variable és del tipus boolean.");
+                correcte = true;
+            }catch(Entrada e){
+                System.out.println(e.getMessage());
+            }
+        }while(!correcte);
     }
 
     public  static byte llegirByte(String missatge) throws Entrada{
-        byte edat= 0;
+        byte edat;
         do {
             System.out.println(missatge);
             try{
@@ -106,12 +111,12 @@ public class Entrada extends Exception{
             catch(InputMismatchException e){
                 throw new Entrada("Error de format.", e);
             }
-        }while(edat==0);
+        }while(edat== 0);
         return edat;
     }
 
     public  static int llegirInt(String missatge) throws Entrada {
-        int edat= 0;
+        int edat;
         do {
             System.out.println(missatge);
             try{
@@ -125,7 +130,7 @@ public class Entrada extends Exception{
     }
 
     public  static float llegirFloat(String missatge) throws Entrada{
-        float edat= 0F;
+        float edat;
         do {
             System.out.println(missatge);
             try{
@@ -139,7 +144,7 @@ public class Entrada extends Exception{
     }
 
     public  static double llegirDouble(String missatge) throws Entrada{
-        double edat= 0;
+        double edat;
         do {
             System.out.println(missatge);
             try{
@@ -177,6 +182,57 @@ public class Entrada extends Exception{
 
         }while(!correcte);
         return inicial;
+    }
+
+    public static String llegirString(String missatge) throws Entrada{
+        String mstg;
+        correcte =  false;
+        do{
+            System.out.println(missatge);
+            try{
+                mstg =  sca.next();
+                correcte = true;
+            }catch(Exception e){
+                throw new Entrada(e.getMessage());
+            }
+        }while(!correcte);
+        return  mstg;
+    }
+
+    public static boolean llegirSiNo(String missatge) throws Entrada{
+        boolean siNo = false;
+        char inicial;
+        String mstg;
+        correcte = false;
+        do{
+            System.out.println(missatge);
+            try{
+                mstg = sca.nextLine();
+                char[] chars = new char[mstg.length()];
+                for (int i = 0; i<chars.length; i++) {
+                    chars[i] = mstg.charAt(i);
+                    if(chars.length == 1){
+                        inicial = chars[i];
+                        if(inicial == 's'){
+                            siNo = true;
+                            correcte = true;
+                        }
+                        else if(inicial == 'n'){
+                            correcte = true;
+                        }
+                        else{
+                            throw new Entrada("El caracter escrit no és: 's' o 'n'");
+                        }
+                    }
+                    else{
+                        throw new Entrada("Error de format");
+                    }
+                }
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }while(!correcte);
+        return siNo;
     }
 }
 
