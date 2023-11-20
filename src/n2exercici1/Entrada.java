@@ -25,6 +25,7 @@ public class Entrada extends Exception{
                 if(e.getCause() != null){
                     System.out.println("Tipus d'error: " + e.getCause().getClass().getName());
                 }
+                sca.nextLine();
             }
         }while(!correcte);
         correcte = false;
@@ -39,11 +40,11 @@ public class Entrada extends Exception{
                 if(e.getCause() != null){
                     System.out.println("Tipus d'error: " + e.getCause().getClass().getName());
                 }
+                sca.nextLine();
             }
         }while(!correcte);
         correcte = false;
         do {
-
             try{
                 float edat = llegirFloat("Introdueix la teva edat:");
                 System.out.println("La teva edat és: " + edat + ". Aquesta variable és del tipus float.");
@@ -53,11 +54,11 @@ public class Entrada extends Exception{
                 if(e.getCause() != null){
                     System.out.println("Tipus d'error: " + e.getCause().getClass().getName());
                 }
+                sca.nextLine();
             }
         }while(!correcte);
         correcte = false;
         do {
-
             try{
                 double edat = llegirDouble("Introdueix la teva edat:");
                 System.out.println("La teva edat és: " + edat + ". Aquesta variable és del tipus double.");
@@ -67,6 +68,7 @@ public class Entrada extends Exception{
                 if(e.getCause() != null){
                     System.out.println("Tipus d'error: " + e.getCause().getClass().getName());
                 }
+                sca.nextLine();
             }
         }while(!correcte);
         correcte = false;
@@ -77,6 +79,7 @@ public class Entrada extends Exception{
                 correcte = true;
             }catch (Entrada e){
                 System.out.println(e.getMessage());
+                sca.nextLine();
             }
         }while(!correcte);
         correcte = false;
@@ -87,6 +90,7 @@ public class Entrada extends Exception{
                 correcte = true;
             }catch(Entrada e){
                 System.out.println(e.getMessage());
+                sca.nextLine();
             }
         }while(!correcte);
         correcte = false;
@@ -97,6 +101,7 @@ public class Entrada extends Exception{
                 correcte = true;
             }catch(Entrada e){
                 System.out.println(e.getMessage());
+                sca.nextLine();
             }
         }while(!correcte);
     }
@@ -149,6 +154,7 @@ public class Entrada extends Exception{
             System.out.println(missatge);
             try{
                 edat = sca.nextDouble();
+                sca.nextLine();
             }
             catch(InputMismatchException e){
                 throw new Entrada("Error de format", e);
@@ -159,43 +165,35 @@ public class Entrada extends Exception{
 
     public static char llegirChar(String missatge) throws Entrada{
         String mstg;
-        char inicial = ' ';
-        correcte =false;
+        char inicial = 'º';
         do{
             System.out.println(missatge);
             try{
                 mstg = sca.nextLine();
-                char[] chars = new char[mstg.length()];
-                for (int i = 0; i<chars.length; i++) {
-                    chars[i] = mstg.charAt(i);
-                    if(chars.length == 1){
-                        inicial = chars[i];
-                        correcte = true;
-                    }
-                    else{
-                        throw new Entrada("Error de format");
-                    }
+                if(mstg.length() == 1){
+                    inicial = mstg.charAt(0);
+                }
+                else{
+                    throw new Entrada("Error de format");
                 }
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
 
-        }while(!correcte);
+        }while(inicial == 'º');
         return inicial;
     }
 
     public static String llegirString(String missatge) throws Entrada{
         String mstg;
-        correcte =  false;
         do{
             System.out.println(missatge);
             try{
                 mstg =  sca.next();
-                correcte = true;
             }catch(Exception e){
                 throw new Entrada(e.getMessage());
             }
-        }while(!correcte);
+        }while(mstg.isEmpty());
         return  mstg;
     }
 
@@ -208,25 +206,21 @@ public class Entrada extends Exception{
             System.out.println(missatge);
             try{
                 mstg = sca.nextLine();
-                char[] chars = new char[mstg.length()];
-                for (int i = 0; i<chars.length; i++) {
-                    chars[i] = mstg.charAt(i);
-                    if(chars.length == 1){
-                        inicial = chars[i];
-                        if(inicial == 's'){
-                            siNo = true;
-                            correcte = true;
-                        }
-                        else if(inicial == 'n'){
-                            correcte = true;
-                        }
-                        else{
-                            throw new Entrada("El caracter escrit no és: 's' o 'n'");
-                        }
+                if(mstg.length() == 1){
+                    inicial = mstg.charAt(0);
+                    if(inicial == 's'){
+                        siNo = true;
+                        correcte = true;
+                    }
+                    else if(inicial == 'n'){
+                        correcte = true;
                     }
                     else{
-                        throw new Entrada("Error de format");
+                        throw new Entrada("El caracter escrit no és: 's' o 'n'");
                     }
+                }
+                else{
+                        throw new Entrada("Error de format");
                 }
             }catch(Exception e){
                 System.out.println(e.getMessage());
