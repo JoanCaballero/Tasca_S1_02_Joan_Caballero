@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws VendaBuidaException {
         Venda venda  = new Venda();
         int opcio, cont = 0;
         float preu;
@@ -30,9 +30,13 @@ public class Main {
                     cont++;
                     break;
                 case (2):
-                    venda.calcularTotal();
-                    System.out.println("El preu total de la compra es: " + venda.getPreuTotal());
-                    opcio = 4;
+                    try {
+                        venda.calcularTotal();
+                        System.out.println("El preu total de la compra es: " + venda.getPreuTotal());
+                        opcio = 4;
+                    }catch(Exception e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case(3):
                     llista = venda.getProductes();

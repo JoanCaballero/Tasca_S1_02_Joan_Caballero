@@ -17,8 +17,8 @@ public class Venda {
         return preuTotal;
     }
 
-    public void calcularTotal(){
-        try{
+    public void calcularTotal() throws VendaBuidaException {
+        //try{
             if(productes[0] != null){
                 for(Producte prod : productes){
                     if(productes[cont]!=null){
@@ -30,9 +30,9 @@ public class Venda {
             else{
                 throw new VendaBuidaException();
             }
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
+        //}catch(Exception e){
+        //    System.out.println(e.getMessage());
+        //}
 
 
     }

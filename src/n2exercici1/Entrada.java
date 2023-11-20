@@ -4,14 +4,16 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Entrada extends Exception{
+    static Scanner sca = new Scanner(System.in);
     public Entrada(String errorMessage){
         super(errorMessage);
     }
     public Entrada(String errorMessage, Throwable causa){
         super(errorMessage, causa);
     }
+    static boolean correcte = false;
     public static void main(String[] args) {
-        boolean correcte = false;
+
         do {
 
             try{
@@ -67,6 +69,28 @@ public class Entrada extends Exception{
                 }
             }
         }while(!correcte);
+        correcte = false;
+        do {
+
+            try{
+                char inicial = llegirChar("Introdueix la teva inicial:");
+                System.out.println("La teva inicial és: " + inicial + ". Aquesta variable és del tipus char.");
+                correcte = true;
+            }catch (Entrada e){
+                System.out.println(e.getMessage());
+            }
+        }while(!correcte);
+        /*correcte = false;
+        do {
+
+            try{
+                char inicial = llegirChar("Introdueix la teva inicial:");
+                System.out.println("La teva inicial és: " + inicial + ". Aquesta variable és del tipus char.");
+                correcte = true;
+            }catch (Entrada e){
+                System.out.println(e.getMessage());
+            }
+        }while(!correcte);*/
         //System.out.println("La teva edat és: " + llegirInt("Introdueix la teva edat:" + ". Aquesta variable és del tipus int"));
         //System.out.println("La teva edat és: " + llegirInt("Introdueix la teva edat:" + ". Aquesta variable és del tipus int"));
         //System.out.println("La teva edat és: " + llegirInt("Introdueix la teva edat:" + ". Aquesta variable és del tipus int"));
@@ -76,7 +100,6 @@ public class Entrada extends Exception{
         byte edat= 0;
         do {
             System.out.println(missatge);
-            Scanner sca = new Scanner(System.in);
             try{
                 edat = sca.nextByte();
             }
@@ -91,7 +114,6 @@ public class Entrada extends Exception{
         int edat= 0;
         do {
             System.out.println(missatge);
-            Scanner sca = new Scanner(System.in);
             try{
                 edat = sca.nextInt();
             }
@@ -106,7 +128,6 @@ public class Entrada extends Exception{
         float edat= 0F;
         do {
             System.out.println(missatge);
-            Scanner sca = new Scanner(System.in);
             try{
                 edat = sca.nextFloat();
             }
@@ -121,7 +142,6 @@ public class Entrada extends Exception{
         double edat= 0;
         do {
             System.out.println(missatge);
-            Scanner sca = new Scanner(System.in);
             try{
                 edat = sca.nextDouble();
             }
@@ -130,6 +150,33 @@ public class Entrada extends Exception{
             }
         }while(edat==0);
         return edat;
+    }
+
+    public static char llegirChar(String missatge) throws Entrada{
+        String mstg;
+        char inicial = ' ';
+        correcte =false;
+        do{
+            System.out.println(missatge);
+            try{
+                mstg = sca.nextLine();
+                char[] chars = new char[mstg.length()];
+                for (int i = 0; i<chars.length; i++) {
+                    chars[i] = mstg.charAt(i);
+                    if(chars.length == 1){
+                        inicial = chars[i];
+                        correcte = true;
+                    }
+                    else{
+                        throw new Entrada("Error de format");
+                    }
+                }
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+
+        }while(!correcte);
+        return inicial;
     }
 }
 
