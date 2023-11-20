@@ -1,7 +1,9 @@
 package n1exercici1;
 
+import java.util.ArrayList;
+
 public class Venda {
-    private final Producte[] productes= new Producte[3];
+    private final ArrayList<Producte> productes= new ArrayList<>();
     private float preuTotal;
     private int cont = 0;
 
@@ -9,7 +11,7 @@ public class Venda {
         this.preuTotal = 0;
     }
 
-    public Producte[] getProductes() {
+    public ArrayList<Producte> getProductes() {
         return productes;
     }
 
@@ -18,10 +20,9 @@ public class Venda {
     }
 
     public void calcularTotal() throws VendaBuidaException {
-        //try{
-            if(productes[0] != null){
+            if(!productes.isEmpty()){
                 for(Producte prod : productes){
-                    if(productes[cont]!=null){
+                    if(productes.get(cont)!=null){
                         preuTotal+= prod.getPreu();
                         cont++;
                     }
@@ -30,11 +31,10 @@ public class Venda {
             else{
                 throw new VendaBuidaException();
             }
-        //}catch(Exception e){
-        //    System.out.println(e.getMessage());
-        //}
+    }
 
-
+    public void afegirProducte(Producte producte){
+        productes.add(producte);
     }
 
 }
