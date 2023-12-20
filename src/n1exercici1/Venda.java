@@ -6,11 +6,10 @@ import java.util.Scanner;
 public class Venda {
     private final ArrayList<Producte> productes;
     private float preuTotal;
-    private int cont = 0;
+    private int cont;
     static Scanner sca = new Scanner(System.in);
 
     public Venda(){
-        this.preuTotal = 0;
         productes = new ArrayList<>();
     }
 
